@@ -1,0 +1,51 @@
+JSON -> Permite salvar dados em JSON no Banco de Dados
+    Qual a diferença entre ele e um VARCHAR()?
+        Valida se o JSON é válido
+
+CREATE TABLE users (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`name` VARCHAR(256) NOT NULL,
+photos JSON NOT NULL,
+register TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP()
+);
+
+INSERT INTO users VALUES (NULL, 'Djalma Sindeaux', '{"photo1": "images/dj.png", "photo2": "images/perfil.png"}', DEFAULT);
+
+INSERT INTO users VALUES (NULL, 'Djalma Sindeaux', '{"photo1": "images/dj.png", "photo2": "images/perfil.png"', DEFAULT); -> Retirei a última chave e dará erro
+
+___________________
+INSERT EM MÚLTIPLAS LINHAS
+
+INSERT INTO users VALUES (NULL, 'João Rangel', '{}', DEFAULT), (NULL, 'Anthony Rafael', '{}', DEFAULT), (NULL, 'Marcus Ribeiro', '{}', DEFAULT);
+
+INSERT INTO users VALUES ROW(NULL, 'Francisco', '{}', DEFAULT), ROW(NULL, 'João Vitor', '{}', DEFAULT), ROW(NULL, 'Ronaldo', '{}', DEFAULT), ROW(NULL, 'Geisa', '{}', DEFAULT);
+
+______________________
+SELECT REDUZIDO
+Mais simples de realizar o SELECT
+
+SELECT * FROM users;
+
+TABLE users;
+
+TABLE users LIMIT 1;
+
+TABLE users ORDER BY name;
+
+___________________
+ROLES - Papéis, funções
+Facilita a criação e definição de privilégios para os usuários
+
+CREATE ROLE 'hcode_dba', 'hcode_dbdesigner', 'hcode_developer';
+
+GRANT ALL ON hcode_cafe.* TO 'hcode_dba';
+GRANT CREATE, DROP, ALTER ON hcode_cafe.* TO 'hcode_dbdesigner';
+GRANT SELECT, INSERT, UPDATE, DELETE ON hcode_cafe.* TO 'hcode_developer';
+
+CREATE USER 'glaucio'@'localhost' IDENTIFIED BY 'glauciohcode';
+CREATE USER 'djalma'@'localhost' IDENTIFIED BY 'djalmahcode';
+CREATE USER 'joao'@'localhost' IDENTIFIED BY 'joaohcode';
+
+GRANT 'hcode_dba' TO 'glaucio'@'localhost';
+GRANT 'hcode_developer' TO 'joao'@'localhost';
+GRANT 'hcode_dbdesigner', 'hcode_developer' TO 'djalma'@'localhost';

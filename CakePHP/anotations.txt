@@ -1,0 +1,21 @@
+PHP 7.2 no mínimo
+
+composer create-project cakephp/app:4.0 hcode_cafe
+composer self-update && composer create-project --prefer-dist cakephp/app:^3.8 cms
+
+extension=php_intl.dll -> Descomentar ou adicionar ao php.ini
+
+composer install
+
+COMENTAR O ABAIXO NO COMPOSER.JSON
+
+"require"
+
+"cakephp/migrations": "3.0.0-beta1",
+"cakephp/plugin-installer": "^1.0",
+"mobiledetect/mobiledetectlib": "2.*"
+
+"require-dev"
+
+"cakephp/bake": "^4.0",
+"cakephp/cakephp-codesniffer": "dev-next",
